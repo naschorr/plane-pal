@@ -1,4 +1,5 @@
 {
+	"admins":						["Username#3716"],
 	"activation_str":				"|",
 	"description":					"PUBG plane tracking bot for Discord (Alpha)\nVisit https://github.com/naschorr/plane-pal",
 	"debug_level":					1,
