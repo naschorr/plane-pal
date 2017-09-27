@@ -101,18 +101,18 @@ class Plotter:
     ## Keys
     PLANE_PATH_WIDTH_KM_KEY = "plane_path_width_km"
     PLANE_PATH_COLOR_KEY = "plane_path_color"
-    FAST_PARACHUTE_PATH_WIDTH_KM_KEY = "fast_parachute_path_width_km"
-    FAST_PARACHUTE_PATH_COLOR_KEY = "fast_parachute_path_color"
-    SLOW_PARACHUTE_PATH_WIDTH_KM_KEY = "slow_parachute_path_width_km"
-    SLOW_PARACHUTE_PATH_COLOR_KEY = "slow_parachute_path_color"
+    SHORT_PARACHUTE_PATH_WIDTH_KM_KEY = "short_parachute_path_width_km"
+    SHORT_PARACHUTE_PATH_COLOR_KEY = "short_parachute_path_color"
+    LONG_PARACHUTE_PATH_WIDTH_KM_KEY = "long_parachute_path_width_km"
+    LONG_PARACHUTE_PATH_COLOR_KEY = "long_parachute_path_color"
 
     ## Defaults
     PLANE_PATH_WIDTH_KM = CONFIG_OPTIONS.get(PLANE_PATH_WIDTH_KM_KEY, 0.1)
     PLANE_PATH_COLOR = CONFIG_OPTIONS.get(PLANE_PATH_COLOR_KEY, "white")
-    FAST_PARACHUTE_PATH_WIDTH_KM = CONFIG_OPTIONS.get(FAST_PARACHUTE_PATH_WIDTH_KM_KEY, 1.4)
-    FAST_PARACHUTE_PATH_COLOR = CONFIG_OPTIONS.get(FAST_PARACHUTE_PATH_COLOR_KEY, "red")
-    SLOW_PARACHUTE_PATH_WIDTH_KM = CONFIG_OPTIONS.get(SLOW_PARACHUTE_PATH_WIDTH_KM_KEY, 3)
-    SLOW_PARACHUTE_PATH_COLOR = CONFIG_OPTIONS.get(SLOW_PARACHUTE_PATH_COLOR_KEY, "orange")
+    SHORT_PARACHUTE_PATH_WIDTH_KM = CONFIG_OPTIONS.get(SHORT_PARACHUTE_PATH_WIDTH_KM_KEY, 1.4)
+    SHORT_PARACHUTE_PATH_COLOR = CONFIG_OPTIONS.get(SHORT_PARACHUTE_PATH_COLOR_KEY, "red")
+    LONG_PARACHUTE_PATH_WIDTH_KM = CONFIG_OPTIONS.get(LONG_PARACHUTE_PATH_WIDTH_KM_KEY, 3)
+    LONG_PARACHUTE_PATH_COLOR = CONFIG_OPTIONS.get(LONG_PARACHUTE_PATH_COLOR_KEY, "orange")
 
 
     def __init__(self, **kwargs):
@@ -123,10 +123,10 @@ class Plotter:
 
         self.plane_path_width_km = float(kwargs.get(self.PLANE_PATH_WIDTH_KM_KEY, self.PLANE_PATH_WIDTH_KM))
         self.plane_path_color = kwargs.get(self.PLANE_PATH_COLOR_KEY, self.PLANE_PATH_COLOR)
-        self.fast_parachute_path_width_km = float(kwargs.get(self.FAST_PARACHUTE_PATH_WIDTH_KM_KEY, self.FAST_PARACHUTE_PATH_WIDTH_KM))
-        self.fast_parachute_path_color = kwargs.get(self.FAST_PARACHUTE_PATH_COLOR_KEY, self.FAST_PARACHUTE_PATH_COLOR)
-        self.slow_parachute_path_width_km = float(kwargs.get(self.SLOW_PARACHUTE_PATH_WIDTH_KM_KEY, self.SLOW_PARACHUTE_PATH_WIDTH_KM))
-        self.slow_parachute_path_color = kwargs.get(self.SLOW_PARACHUTE_PATH_COLOR_KEY, self.SLOW_PARACHUTE_PATH_COLOR)
+        self.short_parachute_path_width_km = float(kwargs.get(self.SHORT_PARACHUTE_PATH_WIDTH_KM_KEY, self.SHORT_PARACHUTE_PATH_WIDTH_KM))
+        self.short_parachute_path_color = kwargs.get(self.SHORT_PARACHUTE_PATH_COLOR_KEY, self.SHORT_PARACHUTE_PATH_COLOR)
+        self.long_parachute_path_width_km = float(kwargs.get(self.LONG_PARACHUTE_PATH_WIDTH_KM_KEY, self.LONG_PARACHUTE_PATH_WIDTH_KM))
+        self.long_parachute_path_color = kwargs.get(self.LONG_PARACHUTE_PATH_COLOR_KEY, self.LONG_PARACHUTE_PATH_COLOR)
 
 
     def _plot_line(self, image, x1, y1, x2, y2, width, color):
@@ -159,13 +159,13 @@ class Plotter:
         ## Prep line widths
         plane_path_width = int(self.plane_path_width_km * self.pixels_per_km)
         ## *2 because the width is only half of what it should be, since players can drop in any direction
-        fast_parachute_path_width = int(self.fast_parachute_path_width_km * self.pixels_per_km * 2)
-        slow_parachute_path_width = int(self.slow_parachute_path_width_km * self.pixels_per_km * 2)
+        short_parachute_path_width = int(self.short_parachute_path_width_km * self.pixels_per_km * 2)
+        long_parachute_path_width = int(self.long_parachute_path_width_km * self.pixels_per_km * 2)
 
         ## Plot the requisite lines
         ## Todo: plot in place?
-        plotted_map = self._plot_line(base_map, x1, y1, x2, y2, slow_parachute_path_width, self.slow_parachute_path_color)
-        plotted_map = self._plot_line(base_map, x1, y1, x2, y2, fast_parachute_path_width, self.fast_parachute_path_color)
+        plotted_map = self._plot_line(base_map, x1, y1, x2, y2, long_parachute_path_width, self.long_parachute_path_color)
+        plotted_map = self._plot_line(base_map, x1, y1, x2, y2, short_parachute_path_width, self.short_parachute_path_color)
         plotted_map = self._plot_line(base_map, x1, y1, x2, y2, plane_path_width, self.plane_path_color)
 
         ## Save and return the final map
