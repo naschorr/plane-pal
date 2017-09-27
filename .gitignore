@@ -36,4 +36,4 @@ pyvenv.cfg
 register.txt
 
 # Ignore the token
-#token.json
+token.json
