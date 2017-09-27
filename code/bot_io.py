@@ -187,6 +187,10 @@ class BotIO:
 
         return True
 
+
+    async def say(self, *args, **kwargs):
+        await self.bot.say(*args, **kwargs)
+
     ## Commands
 
     @commands.command(pass_context=True, no_pm=True)
@@ -202,11 +206,19 @@ class BotIO:
             return None
 
         ## Handy debug output
-        utilities.debug_print("Path command contents:", path_obj.grid_obj.x, path_obj.grid_obj.y, path_obj.grid_obj.section, path_obj.heading_obj.heading, debug_level=4)
+        utilities.debug_print("Path command contents:", 
+                              path_obj.grid_obj.x,
+                              path_obj.grid_obj.y,
+                              path_obj.grid_obj.section,
+                              path_obj.heading_obj.heading,
+                              debug_level=4)
 
         ## Get the file path for the final map image, and generate a callback to delete the image
         map_path = self.plotter.plot_plane_path(path_obj)
         delete_map_callback = self.plotter.file_controller.create_delete_map_callback(map_path)
 
         ## Upload the file to the user's channel in Discord.
-        await self.upload_file(map_path, ctx.message.channel, content="Here you go, <@{}>".format(ctx.message.author.id), callback=delete_map_callback)
+        await self.upload_file(map_path,
+                               ctx.message.channel,
+                               content="Here you go, <@{}>".format(ctx.message.author.id),
+                               callback=delete_map_callback)

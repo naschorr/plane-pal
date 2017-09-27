@@ -11,6 +11,7 @@ import utilities
 import bot_io
 import plotter
 import legend
+import admin
 
 ## Config
 CONFIG_OPTIONS = utilities.load_config()
@@ -129,6 +130,7 @@ class PlanePal:
         self.module_manager.register(plotter.Plotter)
         self.module_manager.register(legend.Legend)
         self.module_manager.register(bot_io.BotIO, self, self.bot)
+        self.module_manager.register(admin.Admin, self)
 
         ## Let us know when the bot is ready to go
         @self.bot.event
@@ -136,6 +138,14 @@ class PlanePal:
             print("Logged in as '{}' (id:{})".format(self.bot.user.name, self.bot.user.id))
 
     ## Methods
+
+    def get_cog(self, cls_name):
+        return self.bot.get_cog(cls_name)
+
+
+    def get_bot_io_cog(self):
+        return self.bot.get_cog("BotIO")
+
 
     def run(self):
         ## Keep bot going despite any misc service errors
