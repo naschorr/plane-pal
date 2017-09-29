@@ -13,8 +13,12 @@ CONFIG_OPTIONS = utilities.load_config()
 
 
 class GridObject:
-    ## Config
-    MAX_SECTIONS = 9    # 3x3 subgrid in each grid on the map
+    ## Keys
+    MAX_SECTIONS_KEY = "max_sections"
+
+    ## Defaults
+    MAX_SECTIONS = CONFIG_OPTIONS.get(MAX_SECTIONS_KEY, 9)    # 3x3 subgrid in each grid on the map
+
 
     def __init__(self, x, y, section=None):
         ## Todo: more checks for data integrity
@@ -75,6 +79,11 @@ class PathObject:
     def __init__(self, grid, heading):
         self.grid_obj = grid
         self.heading_obj = heading
+
+
+    def __str__(self):
+        raw = "('{}', '{}', '{}') @ '{}'"
+        return raw.format(self.grid_obj.x, self.grid_obj.y, self.grid_obj.section, self.heading_obj.heading)
 
 
 class PathParser:
@@ -143,30 +152,44 @@ class PathParser:
 
 class BotIO:
     ## Keys
-    PATH_COMMAND_HELP_KEY = "path_command_help"
+    PLOT_COMMAND_HELP_KEY = "plot_command_help"
 
     ## Defaults
-    PATH_COMMAND_HELP = CONFIG_OPTIONS.get(PATH_COMMAND_HELP_KEY, "")
+    PLOT_COMMAND_HELP = CONFIG_OPTIONS.get(PLOT_COMMAND_HELP_KEY, "")
 
 
     def __init__(self, plane_pal, bot, **kwargs):
         self.plane_pal = plane_pal
         self.bot = bot
 
-        self.path_command_help = kwargs.get(self.PATH_COMMAND_HELP_KEY, self.PATH_COMMAND_HELP)
+        self.plot_command_help = kwargs.get(self.PLOT_COMMAND_HELP_KEY, self.PLOT_COMMAND_HELP)
 
         self.path_parser = PathParser()
         self.plotter = plotter.Plotter()
 
     ## Methods
 
+    async def say(self, *args, **kwargs):
+        await self.bot.say(*args, **kwargs)
+
+
     async def failed_command_feedback(self, message=None):
         ## Generate some feedback for the bot to give to users that mess up invocation
         output = "I couldn't understand the command"
         if(message):
             output += ", {}".format(message)
-        if(self.path_command_help):
-            output += ". Usage: {}".format(self.path_command_help)
+        if(self.plot_command_help):
+            output += ". Usage: {}".format(self.plot_command_help)
+        output += "."
+
+        await self.bot.say(output)
+
+
+    async def failed_upload_feedback(self, message=None):
+        ## Generate some feedback for the bot to give to users when their map upload fails
+        output = "Sorry, I couldn't upload your map"
+        if(message):
+            output += ", {}".format(message)
         output += "."
 
         await self.bot.say(output)
@@ -179,22 +202,17 @@ class BotIO:
                 await self.bot.send_file(channel, fd, content=content)
             except errors.HTTPException as e:
                 utilities.debug_print("Error uploading file at: '{}'", e, debug_level=0)
+                await self.failed_upload_feedback(e)
                 return False
 
         ## Call the callback function, provided it exists
         if(callback):
             return callback()
+        else:
+            return True
 
-        return True
 
-
-    async def say(self, *args, **kwargs):
-        await self.bot.say(*args, **kwargs)
-
-    ## Commands
-
-    @commands.command(pass_context=True, no_pm=True)
-    async def path(self, ctx, *, message):
+    async def _plot(self, ctx, message):
         """Plots your given plane's path on the game map."""
 
         ## Parse the user's command
@@ -206,19 +224,33 @@ class BotIO:
             return None
 
         ## Handy debug output
-        utilities.debug_print("Path command contents:", 
-                              path_obj.grid_obj.x,
-                              path_obj.grid_obj.y,
-                              path_obj.grid_obj.section,
-                              path_obj.heading_obj.heading,
-                              debug_level=4)
+        print("Plotting: {} for '{}'".format(path_obj, ctx.message.author))
 
         ## Get the file path for the final map image, and generate a callback to delete the image
         map_path = self.plotter.plot_plane_path(path_obj)
         delete_map_callback = self.plotter.file_controller.create_delete_map_callback(map_path)
 
         ## Upload the file to the user's channel in Discord.
-        await self.upload_file(map_path,
-                               ctx.message.channel,
-                               content="Here you go, <@{}>".format(ctx.message.author.id),
-                               callback=delete_map_callback)
+        return await self.upload_file(  map_path,
+                                        ctx.message.channel,
+                                        content="Here you go, <@{}>. Good luck!".format(ctx.message.author.id),
+                                        callback=delete_map_callback)
+
+    ## Commands
+
+    @commands.command(pass_context=True, no_pm=True)
+    async def plot(self, ctx, *, message):
+        """Plots your given plane's path on the game map."""
+        return await self._plot(ctx, message)
+
+
+    @commands.command(pass_context=True, no_pm=True, hidden=True)
+    async def path(self, ctx, *, message):
+        """Alias for the plot command."""
+        return await self._plot(ctx, message)
+
+
+    @commands.command(pass_context=True, no_pm=True)
+    async def p(self, ctx, *, message):
+        """Alias for the plot command."""
+        return await self._plot(ctx, message)

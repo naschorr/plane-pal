@@ -11,8 +11,9 @@
 	"_map_file_path":					"",
 	"map_file_extension":				"jpeg",
 
-	"path_command_help":				"Usage: |path (Grid X marker)(Grid Y marker)[Grid subsection] (Plane heading)",
+	"plot_command_help":				"Usage: |plot (Grid X marker)(Grid Y marker)[Grid subsection] (Plane heading)",
 
+	"max_sections":						9,
 	"plane_path_width_km":				0.1,
 	"plane_path_color":					"rgba(255, 255, 255, 192)",
 	"short_parachute_path_width_km":	1.4,
