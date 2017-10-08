@@ -179,7 +179,7 @@ class BotIO:
         if(message):
             output += ", {}".format(message)
         if(self.plot_command_help):
-            output += ". Usage: {}".format(self.plot_command_help)
+            output += ". {}".format(self.plot_command_help)
         output += "."
 
         await self.bot.say(output)
@@ -234,7 +234,7 @@ class BotIO:
         return await self.upload_file(  map_path,
                                         ctx.message.channel,
                                         content="Here you go, <@{}>. Good luck!".format(ctx.message.author.id),
-                                        callback=delete_map_callback)
+                                        callback=delete_map_callback )
 
     ## Commands
 
