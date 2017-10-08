@@ -26,19 +26,28 @@ See the examples section below.
 
 ### Examples
 `|plot ak1 90`
-![ak1 90](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/ak1%2090.jpeg)
 
-`|p al7 105`
-![al7 105](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/al7%20105.jpeg)
+![ak1 90](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/ak1%2090%20small.jpeg)
+
+
+`|p al7 105`</p>
+
+![al7 105](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/al7%20105%20small.jpg)
+
 
 `|plot ep 355`
-![ep 355](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/ep%20355.jpeg)
+
+![ep 355](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/ep%20355%20small.jpg)
+
 
 `|p gp7 330`
-![gp7 330](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/gp7%20330.jpeg)
+
+![gp7 330](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/gp7%20330%20small.jpg)
+
 
 `|p hn 275`
-![hn 275](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/hn%20275.jpeg)
+
+![hn 275](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/hn%20275%20small.jpg)
 
 ### Colors
 The colors seen on the maps represent common distances you can travel from the plane's path. Data was pulled from [this video](https://www.youtube.com/watch?v=worfS4pDkP4) by WackyJacky101.
