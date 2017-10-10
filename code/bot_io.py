@@ -92,7 +92,7 @@ class PathParser:
     HEADING_REGEX_PATTERN_KEY = "heading_regex_pattern"
 
     ## Defaults
-    GRID_REGEX_PATTERN = CONFIG_OPTIONS.get(GRID_REGEX_PATTERN_KEY, r"([a-hA-H])([i-pI-P])([1-9]?)")
+    GRID_REGEX_PATTERN = CONFIG_OPTIONS.get(GRID_REGEX_PATTERN_KEY, r"([a-pA-P])([a-pA-P])([1-9]?)")
     HEADING_REGEX_PATTERN = CONFIG_OPTIONS.get(HEADING_REGEX_PATTERN_KEY, r"(\d{1,3})")
 
 
@@ -116,14 +116,24 @@ class PathParser:
 
     def parse_grid(self, message):
         ## Basic regex string parsing, with errors popped on getting an unknown command
+        ## Todo: implement re.IGNORECASE (not working for whatever reason?)
         match = self.grid_regex.search(message)
+        #print(match, self.grid_regex.search(message))
         if(match):
             message = message[match.end():]
+            ## Assume that the user correctly entered the X and Y grid markers for now
             x = match.group(1)
             y = match.group(2)
             section = match.group(3)
 
             if(x and y):
+                ## This lets the user enter in the X and Y grid markers in the wrong order, and still tolerate it.
+                ## Obviously, it's still a good idea to enter them in correctly.
+
+                ## If x has a greater ascii value, then it can't be the x component of the grid marker. Swap the values
+                if(ord(x) > ord(y)):
+                    x, y = y, x
+
                 return GridObject(x, y, section), message
             elif(y and not x):
                 raise RuntimeError("Invalid X grid marker '{}'".format(x))
