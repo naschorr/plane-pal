@@ -10,7 +10,7 @@ PUBG plane tracking bot for Discord
 - Start plotting!
 
 ### Usage
-`|plot <X Grid Marker><Y Grid Marker>[Grid Subsection] <Plene's Heading>`
+`|plot <X Grid Marker><Y Grid Marker>[Grid Subsection] <Plane's Heading>`
 
 Plane Pal get activated with the pipe: `|` character by default, and it can plot out the plane's path with either the `plot`, `path`, or `p` keywords.
 
