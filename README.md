@@ -1,11 +1,13 @@
-# plane-pal
+<p align="center"><img src="https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/avatar%20small.png"></p>
+
+# Plane Pal
 PUBG plane tracking bot for Discord
 
 ### Activation
 - Go to [this page](https://discordapp.com/oauth2/authorize?client_id=361729535496028161&scope=bot&permissions=0) on Discord's site.
 - Select the server that you want Plane Pal to be added into.
 - Hit the "Authorize" button.
-- Start plotting.
+- Start plotting!
 
 ### Usage
 `|plot <X Grid Marker><Y Grid Marker>[Grid Subsection] <Plene's Heading>`
