@@ -21,15 +21,83 @@ class GridObject:
 
 
     def __init__(self, x, y, section=None):
-        ## Todo: more checks for data integrity
-        self.x = x.lower()
-        self.y = y.lower()
-        self.section = int(section) if section else None
+        ## Prepopulate the members
+        self.valid = True
+        self._x = None
+        self._y = None
+        self._section = None
+
+        self.x = x
+        self.y = y
+        self.section = section
+
+    ## Properties
+
+    @property
+    def x(self):
+        return self._x
+
+
+    @x.setter
+    def x(self, value):
+        x = value.lower()
+
+        ## This lets the user enter in the X and Y grid markers in the wrong order, and still tolerate it.
+        ## Obviously, it's still a good idea to enter them in correctly. See y property as well.
+
+        ## Make sure x's ascii value is between 'a' and 'h's ascii values
+        if(ord('a') <= ord(x) <= ord('h')):
+            self._x = x
+        ## If it's less than 'a', then theres no hope, just clamp it to 'a'
+        elif(ord('a') > ord(x)):
+            self._x = 'a'
+        ## Otherwise see if y's setter can handle it without giving up.
+        else:
+            self._x = None
+            self.valid = False
+            self.y = x
+
+
+    @property
+    def y(self):
+        return self._y
+
+
+    @y.setter
+    def y(self, value):
+        y = value.lower()
+
+        if(ord('i') <= ord(y) <= ord('p')):
+            self._y = y
+        elif(ord('p') < ord(y)):
+            self._y = 'p'
+        else:
+            self._y = None
+            self.valid = False
+            self.x = y
+
+
+    @property
+    def section(self):
+        return self._section
+
+
+    @section.setter
+    def section(self, value):
+        section = int(value) if value else 0
+        if(1 <= section <= self.MAX_SECTIONS):
+            self._section = section
+        else:        
+            self._section = None
 
     ## Methods
 
     def get_true_x(self, pixels_per_km):
         ## True X calculated from the left side of the image
+
+        ## Sanity check to prevent garbage data from being used
+        if(not self.valid):
+            raise RuntimeError("Can't get true X distance without valid X: ({}).".format(self.x))
 
         letter_index = ord(self.x) - ord('a')   ## Grid index = difference between grid marker's ascii value and a's ascii value
 
@@ -50,6 +118,9 @@ class GridObject:
 
     def get_true_y(self, pixels_per_km):
         ## True Y calculated from the top of the image. See get_true_x() above for comments
+
+        if(not self.valid):
+            raise RuntimeError("Can't get true Y distance without valid Y: ({}).".format(self.y))
 
         letter_index = ord(self.y) - ord('i')
 
@@ -126,15 +197,11 @@ class PathParser:
             y = match.group(2)
             section = match.group(3)
 
+            ## Todo: improve error output and handling
             if(x and y):
-                ## This lets the user enter in the X and Y grid markers in the wrong order, and still tolerate it.
-                ## Obviously, it's still a good idea to enter them in correctly.
-
-                ## If x has a greater ascii value, then it can't be the x component of the grid marker. Swap the values
-                if(ord(x) > ord(y)):
-                    x, y = y, x
-
-                return GridObject(x, y, section), message
+                grid_obj = GridObject(x, y, section)
+                if(grid_obj.valid):
+                    return grid_obj, message
             elif(y and not x):
                 raise RuntimeError("Invalid X grid marker '{}'".format(x))
             elif(x and not y):
