@@ -191,7 +191,7 @@ class PathParser:
         match = self.grid_regex.search(message)
         #print(match, self.grid_regex.search(message))
         if(match):
-            message = message[match.end():]
+            message = message[match.start():match.end()]
             ## Assume that the user correctly entered the X and Y grid markers for now
             x = match.group(1)
             y = match.group(2)
