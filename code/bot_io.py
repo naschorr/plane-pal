@@ -191,7 +191,6 @@ class PathParser:
         match = self.grid_regex.search(message)
         #print(match, self.grid_regex.search(message))
         if(match):
-            message = message[match.start():match.end()]
             ## Assume that the user correctly entered the X and Y grid markers for now
             x = match.group(1)
             y = match.group(2)
@@ -201,7 +200,7 @@ class PathParser:
             if(x and y):
                 grid_obj = GridObject(x, y, section)
                 if(grid_obj.valid):
-                    return grid_obj, message
+                    return grid_obj, message[match.end():]
             elif(y and not x):
                 raise RuntimeError("Invalid X grid marker '{}'".format(x))
             elif(x and not y):
@@ -209,7 +208,7 @@ class PathParser:
             else:
                 raise RuntimeError("Invalid X and Y grid markers '{}', '{}'".format(x, y))
 
-        raise RuntimeError("Invalid grid marker for '{}'".format(message))
+        raise RuntimeError("Invalid grid marker for '{}'".format(message[match.start():match.end()]))
 
 
     def parse_heading(self, message):
