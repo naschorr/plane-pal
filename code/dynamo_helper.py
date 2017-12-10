@@ -70,6 +70,10 @@ class DynamoHelper:
 
     def put(self, dynamo_item):
         if(self.enabled):
-            return self.table.put_item(Item=dynamo_item.getDict())
+            try:
+                return self.table.put_item(Item=dynamo_item.getDict())
+            except Exception as e:
+                ## Don't let issues with dynamo tank the bot's functionality
+                print(e)
         else:
             return None
