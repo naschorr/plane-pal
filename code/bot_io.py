@@ -6,7 +6,7 @@ from discord.ext import commands
 
 import utilities
 import plotter
-import legend
+import dynamo_helper
 
 ## Config
 CONFIG_OPTIONS = utilities.load_config()
@@ -153,8 +153,11 @@ class PathObject:
 
 
     def __str__(self):
-        raw = "('{}', '{}', '{}') @ '{}'"
-        return raw.format(self.grid_obj.x, self.grid_obj.y, self.grid_obj.section, self.heading_obj.heading)
+        raw = "{} {} {} {}"
+        return raw.format(  self.grid_obj.x,
+                            self.grid_obj.y,
+                            self.grid_obj.section,
+                            self.heading_obj.heading )
 
 
 class PathParser:
@@ -242,6 +245,7 @@ class BotIO:
 
         self.path_parser = PathParser()
         self.plotter = plotter.Plotter()
+        self.dynamo_db = dynamo_helper.DynamoHelper()
 
     ## Methods
 
@@ -297,10 +301,27 @@ class BotIO:
         except RuntimeError as e:
             ## Give them some feedback if the command isn't understandable
             await self.failed_command_feedback(e)
-            return None
 
-        ## Handy debug output
-        print("Plotting: {} for '{}'".format(path_obj, ctx.message.author))
+            ## Put some information about the failed query into the database
+            self.dynamo_db.put(dynamo_helper.DynamoItem(
+                ctx.message.author.id,
+                ctx.message.timestamp.timestamp(),
+                ctx.message.channel.name,
+                ctx.message.server.name,
+                message,
+                None
+            ))
+            return None
+        else:
+            ## Put some information about the successful query into the database
+            self.dynamo_db.put(dynamo_helper.DynamoItem(
+                ctx.message.author.id,
+                ctx.message.timestamp.timestamp(),
+                ctx.message.channel.name,
+                ctx.message.server.name,
+                message,
+                str(path_obj)
+            ))
 
         ## Get the file path for the final map image, and generate a callback to delete the image
         map_path = self.plotter.plot_plane_path(path_obj)

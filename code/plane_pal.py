@@ -2,6 +2,7 @@ import importlib
 import sys
 import os
 import asyncio
+import time
 from collections import OrderedDict
 
 import discord
@@ -10,7 +11,6 @@ from discord.ext import commands
 import utilities
 import bot_io
 import plotter
-import legend
 import admin
 
 ## Config
@@ -128,7 +128,6 @@ class PlanePal:
 
         ## Register the modules (Order of registration is important, make sure dependancies are loaded first)
         self.module_manager.register(plotter.Plotter)
-        self.module_manager.register(legend.Legend)
         self.module_manager.register(bot_io.BotIO, self, self.bot)
         self.module_manager.register(admin.Admin, self)
 
@@ -153,6 +152,7 @@ class PlanePal:
             self.bot.run(utilities.load_json(self.token_file_path)[self.TOKEN_KEY])
         except Exception as e:
             utilities.debug_print("Critical exception when running bot", e, debug_level=0)
+            time.sleep(1)
             self.run()
 
 
