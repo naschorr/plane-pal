@@ -7,8 +7,14 @@
     "_token_file_path":					"",
     "resources_folder":					"resources",
     "_resources_folder_path":			"",
-    "map_file":							"map.jpeg",
-    "_map_file_path":					"",
+    "map_files":						{
+        "erangel": "erangel.jpeg",
+        "miramar": "miramar.jpeg"
+    },
+    "_map_file_paths":					{
+        "erangel": "overridden/path/to/erangel.jpeg",
+        "miramar": "overridden/path/to/miramar.jpeg"
+    },
     "map_file_extension":				"jpeg",
 
     "plot_command_help":				"Usage: |plot (Grid X marker)(Grid Y marker)[Grid subsection] (Plane heading)",

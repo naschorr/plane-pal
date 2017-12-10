@@ -292,7 +292,7 @@ class BotIO:
             return True
 
 
-    async def _plot(self, ctx, message):
+    async def _plot(self, ctx, message, map_name):
         """Plots your given plane's path on the game map."""
 
         ## Parse the user's command
@@ -308,6 +308,7 @@ class BotIO:
                 ctx.message.timestamp.timestamp(),
                 ctx.message.channel.name,
                 ctx.message.server.name,
+                map_name,
                 message,
                 None
             ))
@@ -319,12 +320,13 @@ class BotIO:
                 ctx.message.timestamp.timestamp(),
                 ctx.message.channel.name,
                 ctx.message.server.name,
+                map_name,
                 message,
                 str(path_obj)
             ))
 
         ## Get the file path for the final map image, and generate a callback to delete the image
-        map_path = self.plotter.plot_plane_path(path_obj)
+        map_path = self.plotter.plot_plane_path(map_name, path_obj)
         delete_map_callback = self.plotter.file_controller.create_delete_map_callback(map_path)
 
         ## Upload the file to the user's channel in Discord.
@@ -336,18 +338,24 @@ class BotIO:
     ## Commands
 
     @commands.command(pass_context=True, no_pm=True)
-    async def plot(self, ctx, *, message):
-        """Plots your given plane's path on the game map."""
-        return await self._plot(ctx, message)
-
-
-    @commands.command(pass_context=True, no_pm=True, hidden=True)
-    async def path(self, ctx, *, message):
-        """Alias for the plot command."""
-        return await self._plot(ctx, message)
+    async def erangel(self, ctx, *, message):
+        """Plots your given plane's path on the map of Erangel."""
+        return await self._plot(ctx, message, "erangel")
 
 
     @commands.command(pass_context=True, no_pm=True)
-    async def p(self, ctx, *, message):
-        """Alias for the plot command."""
-        return await self._plot(ctx, message)
+    async def miramar(self, ctx, *, message):
+        """Plots your given plane's path on the map of Miramar."""
+        return await self._plot(ctx, message, "miramar")
+
+
+    @commands.command(pass_context=True, no_pm=True)
+    async def e(self, ctx, *, message):
+        """Alias for plotting on Erangel's map."""
+        return await self._plot(ctx, message, "erangel")
+
+
+    @commands.command(pass_context=True, no_pm=True)
+    async def m(self, ctx, *, message):
+        """Alias for plotting on Miramar's map."""
+        return await self._plot(ctx, message, "miramar")

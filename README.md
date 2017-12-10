@@ -10,9 +10,9 @@ PUBG plane tracking bot for Discord
 - Start plotting!
 
 ### Usage
-`|plot <X Grid Marker><Y Grid Marker>[Grid Subsection] <Plane's Heading>`
+`|<erangel|miramar> <X Grid Marker><Y Grid Marker>[Grid Subsection] <Plane's Heading>`
 
-Plane Pal get activated with the pipe: `|` character by default, and it can plot out the plane's path with either the `plot`, `path`, or `p` keywords.
+Plane Pal get activated with the pipe: `|` character by default, and it can plot out the plane's path with either the `erangel` or `e` keywords if you want to plot the path on the original PUBG map, Erangel. Alternatively, you can plot the map on the newer desert map, Miramar with the `miramar` or `m` keywords.
 
 To get the bot to plot the plane's trajectory, it needs two pieces of information:
 - The plane's current position (its grid markers)
@@ -27,29 +27,39 @@ You can also more accurately position the plane with the optional `Grid Subsecti
 See the examples section below.
 
 ### Examples
-`|plot ak1 90`
+`|erangel ak1 90`
 
-![ak1 90](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/ak1%2090%20small.jpeg)
-
-
-`|p al7 105`</p>
-
-![al7 105](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/al7%20105%20small.jpg)
+![erangel ak1 90](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20ak1%2090%20small.jpeg)
 
 
-`|plot ep 355`
+`|e al7 105`
 
-![ep 355](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/ep%20355%20small.jpg)
-
-
-`|p gp7 330`
-
-![gp7 330](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/gp7%20330%20small.jpg)
+![erangel al7 105](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20al7%20105%20small.jpg)
 
 
-`|p hn 275`
+`|erangel ep 355`
 
-![hn 275](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/hn%20275%20small.jpg)
+![erangel ep 355](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20ep%20355%20small.jpg)
+
+
+`|e gp7 330`
+
+![erangel gp7 330](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20gp7%20330%20small.jpg)
+
+
+`|e hn 275`
+
+![erangel hn 275](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20hn%20275%20small.jpg)
+
+
+`|miramar al 115`
+
+![miramar al 115](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20al%20115%20small.jpg)
+
+
+`|m ei1 175`
+
+![miramar ei1 175](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20ei1%20175%20small.jpg)
 
 ### Colors
 The colors seen on the maps represent common distances you can travel from the plane's path. Data was pulled from [this video](https://www.youtube.com/watch?v=worfS4pDkP4) by WackyJacky101.

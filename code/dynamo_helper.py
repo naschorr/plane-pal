@@ -8,11 +8,12 @@ import utilities
 CONFIG_OPTIONS = utilities.load_config()
 
 class DynamoItem:
-    def __init__(self, user, timestamp, channel, server, raw_query, parsed_query):
+    def __init__(self, user, timestamp, channel, server, map_name, raw_query, parsed_query):
         self.user = int(user)
         self.timestamp = int(timestamp * 1000)
         self.channel = channel
         self.server = server
+        self.map_name = map_name
         self.raw_query = raw_query
         self.parsed_query = parsed_query
 
@@ -27,6 +28,7 @@ class DynamoItem:
             "timestamp": self.timestamp,
             "channel": self.channel,
             "server": self.server,
+            "map_name": self.map_name,
             "raw_query": self.raw_query,
             "parsed_query": self.parsed_query
         }
