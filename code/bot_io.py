@@ -326,7 +326,8 @@ class BotIO:
             ))
 
         ## Get the file path for the final map image, and generate a callback to delete the image
-        map_path = self.plotter.plot_plane_path(map_name, path_obj)
+        plotted_map = self.plotter.plot_plane_path(map_name, path_obj)
+        map_path = self.plotter.file_controller.save_map(plotted_map)
         delete_map_callback = self.plotter.file_controller.create_delete_map_callback(map_path)
 
         ## Upload the file to the user's channel in Discord.

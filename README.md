@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/avatar%20small.png"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/avatar.png"></p>
 
 # Plane Pal
 PUBG plane tracking bot for Discord
@@ -29,37 +29,42 @@ See the examples section below.
 ### Examples
 `|erangel ak1 90`
 
-![erangel ak1 90](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20ak1%2090%20small.jpeg)
+![erangel ak1 90](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20ak1%2090.jpeg)
 
 
 `|e al7 105`
 
-![erangel al7 105](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20al7%20105%20small.jpg)
+![erangel al7 105](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20al7%20105.jpeg)
 
 
 `|erangel ep 355`
 
-![erangel ep 355](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20ep%20355%20small.jpg)
+![erangel ep 355](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20ep%20355.jpeg)
 
 
 `|e gp7 330`
 
-![erangel gp7 330](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20gp7%20330%20small.jpg)
+![erangel gp7 330](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20gp7%20330.jpeg)
 
 
 `|e hn 275`
 
-![erangel hn 275](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20hn%20275%20small.jpg)
+![erangel hn 275](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20hn%20275.jpeg)
 
 
 `|miramar al 115`
 
-![miramar al 115](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20al%20115%20small.jpg)
+![miramar al 115](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20al%20115.jpeg)
 
 
 `|m ei1 175`
 
-![miramar ei1 175](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20ei1%20175%20small.jpg)
+![miramar ei1 175](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20ei1%20175.jpeg)
+
+
+`|miramar ho 280`
+
+![miramar ho 280](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20ho%20280.jpeg)
 
 ### Colors
 The colors seen on the maps represent common distances you can travel from the plane's path. Data was pulled from [this video](https://www.youtube.com/watch?v=worfS4pDkP4) by WackyJacky101.

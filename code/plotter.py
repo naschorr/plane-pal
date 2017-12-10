@@ -5,7 +5,6 @@ from PIL import Image, ImageDraw
 
 import utilities
 
-
 ## Config
 CONFIG_OPTIONS = utilities.load_config()
 
@@ -82,8 +81,8 @@ class PlotterFileController:
         return maps
 
 
-    def save_map(self, pillow_image):
-        file_name = self._generate_unique_file_name(self.map_file_extension)
+    def save_map(self, pillow_image, file_name=None):
+        file_name = self._generate_unique_file_name(self.map_file_extension) if not file_name else file_name
         file_path = os.sep.join([self.output_folder_path, file_name])
         try:
             pillow_image.save(file_path, format=self.map_file_extension)
@@ -243,5 +242,5 @@ class Plotter:
         plotted_map = self._plot_line(base_map, x1, y1, x2, y2, plane_path_width, self.plane_path_color)
         plotted_map = self._plot_triangle(base_map, x, y, angle, triangle_size, self.triangle_color)
 
-        ## Save and return the final map
-        return self.file_controller.save_map(plotted_map)
+        ## return the final map
+        return plotted_map
