@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/avatar.png"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/avatar small.png"></p>
 
 # Plane Pal
 PUBG plane tracking bot for Discord
