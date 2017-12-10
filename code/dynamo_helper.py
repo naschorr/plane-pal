@@ -74,6 +74,6 @@ class DynamoHelper:
                 return self.table.put_item(Item=dynamo_item.getDict())
             except Exception as e:
                 ## Don't let issues with dynamo tank the bot's functionality
-                print(e)
+                utilities.debug_print("Exception while performing dynamo put", e, debug_level=1)
         else:
             return None
