@@ -26,8 +26,10 @@
     "short_parachute_path_color":		"rgba(229, 98, 98, 48)",
     "long_parachute_path_width_km": 	3,
     "long_parachute_path_color":		"rgba(239, 233, 110, 24)",
+    "triangle_size_km":                 0.25,
+    "triangle_color":                   "rgba(255, 255, 255, 192)",
 
-    "boto_enable":                      true,
+    "boto_enable":                      false,
     "boto_resource":					"dynamodb",
     "boto_region_name":                 "us-east-2",
     "boto_table_name":                  "PlanePal",
