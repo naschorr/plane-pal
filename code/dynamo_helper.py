@@ -75,5 +75,6 @@ class DynamoHelper:
             except Exception as e:
                 ## Don't let issues with dynamo tank the bot's functionality
                 utilities.debug_print("Exception while performing dynamo put", e, debug_level=1)
+                return None
         else:
             return None
