@@ -10,61 +10,61 @@ PUBG plane tracking bot for Discord
 - Start plotting!
 
 ### Usage
-`|<erangel|miramar> <X Grid Marker><Y Grid Marker>[Grid Subsection] <Plane's Heading>`
+`|<erangel|miramar> <Plane's Heading> <X Grid Marker><Y Grid Marker>[Grid Subsection]`
 
 Plane Pal get activated with the pipe: `|` character by default, and it can plot out the plane's path with either the `erangel` or `e` keywords if you want to plot the path on the original PUBG map, Erangel. Alternatively, you can plot the map on the newer desert map, Miramar with the `miramar` or `m` keywords.
 
 To get the bot to plot the plane's trajectory, it needs two pieces of information:
-- The plane's current position (its grid markers)
 - The plane's current heading
-
-The grid marker comes from the letters representing the plane's X and Y location on the map. For example, grid marker `BK` has the Georgopol bridge running through the middle of it, and marker `EO` has most of the military base inside it. Just make sure that the X marker comes before the Y marker when invoking Plane Pal.
+- The plane's current position (its grid markers)
 
 The plane's heading just comes from looking forward while the plane is flying, and seeing what the compass at the top of the screen says.
+
+The grid marker comes from the letters representing the plane's X and Y location on the map. For example, in Erangel, grid marker `BK` has the Georgopol bridge running through the middle of it, and marker `EO` has most of the military base inside it. Just make sure that the X marker comes before the Y marker when invoking Plane Pal.
 
 You can also more accurately position the plane with the optional `Grid Subsection` argument, which just comes from further subdividing the plane's current grid into nine equal squares, each with an imaginary number that corresponds to the squares location. The numbers are oriented in the same way as a keyboard in that square one is at the bottom left corner, and square nine is at the top right corner. If you omit this, the bot will just assume that the plane travelled through the middle of the grid.
 
 See the examples section below.
 
 ### Examples
-`|erangel ak1 90`
+`|erangel 90 ak1`
 
-![erangel ak1 90](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20ak1%2090.jpeg)
-
-
-`|e al7 105`
-
-![erangel al7 105](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20al7%20105.jpeg)
+![erangel 90 ak1](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%2090%20ak1.jpeg)
 
 
-`|erangel ep 355`
+`|e 105 al7`
 
-![erangel ep 355](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20ep%20355.jpeg)
-
-
-`|e gp7 330`
-
-![erangel gp7 330](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20gp7%20330.jpeg)
+![erangel 105 al7](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20105%20al7.jpeg)
 
 
-`|e hn 275`
+`|erangel 355 ep`
 
-![erangel hn 275](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20hn%20275.jpeg)
-
-
-`|miramar al 115`
-
-![miramar al 115](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20al%20115.jpeg)
+![erangel 355 ep](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20355%20ep.jpeg)
 
 
-`|m ei1 175`
+`|e 330 gp7`
 
-![miramar ei1 175](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20ei1%20175.jpeg)
+![erangel 330 gp7](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20330%20gp7.jpeg)
 
 
-`|miramar ho 280`
+`|e 275 hn`
 
-![miramar ho 280](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20ho%20280.jpeg)
+![erangel 275 hn](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/erangel%20275%20hn.jpeg)
+
+
+`|miramar 115 al`
+
+![miramar 115 al](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20115%20al.jpeg)
+
+
+`|m 175 ei1`
+
+![miramar 175 ei1 175](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20175%20ei1.jpeg)
+
+
+`|miramar 280 ho`
+
+![miramar 280 ho](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20280%20ho.jpeg)
 
 ### Colors
 The colors seen on the maps represent common distances you can travel from the plane's path. Data was pulled from [this video](https://www.youtube.com/watch?v=worfS4pDkP4) by WackyJacky101.

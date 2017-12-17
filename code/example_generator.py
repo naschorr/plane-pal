@@ -11,14 +11,14 @@ CONFIG_OPTIONS = utilities.load_config()
 EXAMPLE_SIZE = (540, 540)
 EXAMPLE_RESIZE_FILTER = Image.LANCZOS
 EXAMPLES = [
-    ["erangel", "ak1 90"],
-    ["erangel", "al7 105"],
-    ["erangel", "ep 355"],
-    ["erangel", "gp7 330"],
-    ["erangel", "hn 275"],
-    ["miramar", "al 115"],
-    ["miramar", "ei1 175"],
-    ["miramar", "ho 280"]
+    ["erangel", "90 ak1"],
+    ["erangel", "105 al7"],
+    ["erangel", "355 ep"],
+    ["erangel", "330 gp7"],
+    ["erangel", "275 hn"],
+    ["miramar", "115 al"],
+    ["miramar", "175 ei1"],
+    ["miramar", "280 ho"]
 ]
 
 class ExampleGenerator:

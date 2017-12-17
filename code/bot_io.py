@@ -176,14 +176,13 @@ class PathParser:
 
 
     def parse_message(self, message):
-        start_grid, message = self.parse_grid(message)
-        if(not start_grid):
-            raise RuntimeError("Invalid grid marker for '{}'".format(message))
-
-        ## Todo: Specify heading or end_grid?
         heading, message = self.parse_heading(message)
         if(not heading):
             raise RuntimeError("Invalid heading designation for '{}'".format(message))
+
+        start_grid, message = self.parse_grid(message)
+        if(not start_grid):
+            raise RuntimeError("Invalid grid marker for '{}'".format(message))
 
         return PathObject(start_grid, heading)
 
@@ -211,7 +210,7 @@ class PathParser:
             else:
                 raise RuntimeError("Invalid X and Y grid markers '{}', '{}'".format(x, y))
 
-        raise RuntimeError("Invalid grid marker for '{}'".format(message[match.start():match.end()]))
+        raise RuntimeError("Invalid grid marker for '{}'".format(message))
 
 
     def parse_heading(self, message):

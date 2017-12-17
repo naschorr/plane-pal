@@ -17,7 +17,7 @@
     },
     "map_file_extension":				"jpeg",
 
-    "plot_command_help":				"Usage: |plot (Grid X marker)(Grid Y marker)[Grid subsection] (Plane heading)",
+    "plot_command_help":				"Usage: |<erangel|miramar> <Plane's Heading> <X Grid Marker><Y Grid Marker>[Grid Subsection]",
 
     "max_sections":						9,
     "plane_path_width_km":				0.1,
