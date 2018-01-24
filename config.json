@@ -22,12 +22,22 @@
     "max_sections":						9,
     "plane_path_width_km":				0.1,
     "plane_path_color":					"rgba(255, 255, 255, 192)",
-    "short_parachute_path_width_km":	1.4,
-    "short_parachute_path_color":		"rgba(229, 98, 98, 64)",
-    "long_parachute_path_width_km": 	3,
-    "long_parachute_path_color":		"rgba(239, 233, 110, 48)",
     "triangle_size_km":                 0.25,
     "triangle_color":                   "rgba(255, 255, 255, 255)",
+    "parachute_config":                 {
+        "erangel": {
+            "short_parachute_path_width_km":	1.4,
+            "short_parachute_path_color":		"rgba(229, 98, 98, 64)",
+            "long_parachute_path_width_km": 	2.4,
+            "long_parachute_path_color":		"rgba(239, 233, 110, 48)"
+        },
+        "miramar": {
+            "short_parachute_path_width_km":	1.25,
+            "short_parachute_path_color":		"rgba(229, 98, 98, 64)",
+            "long_parachute_path_width_km": 	2.25,
+            "long_parachute_path_color":		"rgba(239, 225, 110, 72)"
+        }
+    },
 
     "boto_enable":                      false,
     "boto_resource":					"dynamodb",

@@ -12,7 +12,7 @@ PLATFORM = sys.platform
 
 def get_root_path():
 	## -1 includes this script itself in the realpath
-	return os.sep.join(os.path.realpath(__file__).split(os.path.sep)[:(-1 - DIRS_FROM_ROOT)])
+    return os.sep.join(os.path.realpath(__file__).split(os.path.sep)[:(-1 - DIRS_FROM_ROOT)])
 
 
 def load_json(path):
@@ -21,7 +21,7 @@ def load_json(path):
 
 
 def load_config():
-	return load_json(os.sep.join([get_root_path(), CONFIG_NAME]))
+    return load_json(os.sep.join([get_root_path(), CONFIG_NAME]))
 
 
 def debug_print(*args, **kwargs):

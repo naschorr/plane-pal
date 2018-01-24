@@ -67,11 +67,11 @@ See the examples section below.
 ![miramar 280 ho](https://raw.githubusercontent.com/naschorr/plane-pal/master/resources/examples/miramar%20280%20ho.jpeg)
 
 ### Colors
-The colors seen on the maps represent common distances you can travel from the plane's path. Data was pulled from [this video](https://www.youtube.com/watch?v=worfS4pDkP4) by WackyJacky101.
+The colors seen on the maps represent common distances you can travel from the plane's path. Data was pulled from [this post](https://www.reddit.com/r/PUBATTLEGROUNDS/comments/7sg1qm/parachuting_10_summary_of_changes/) by Sarillexis. (I'd also recommend looking at [this video](https://www.youtube.com/watch?v=worfS4pDkP4) by WackyJacky101 for a good parachuting overview.)
 
 - The white line shows the plane's path over the game's map.
-- The orange-ish area shows the 1.4 km distance that a player can travel by gliding as far as possible from the plane before they're forced to pull their parachute.
-- The yellow-ish area shows the 3 km distance that a player can travel by opening their parachute immediately and maintaining a 20 km/h vertical speed.
+- The orange-ish area shows the distance that a player can travel by gliding as far as possible from the plane before they're forced to pull their parachute.
+- The yellow-ish area shows the distance that a player can travel by opening their parachute immediately and maintaining a 30 km/h vertical speed.
 
 ### Installation (Windows)
 If you want to customize the bot to suit your needs, you may want to install and run it locally. If you're on Linux, then you can probably figure out how to do this on your own. To do that:

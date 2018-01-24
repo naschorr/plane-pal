@@ -108,6 +108,7 @@ class PlotterFileController:
 
 class Plotter:
     ## Keys
+    PARACHUTE_CONFIG_KEY = "parachute_config"
     PLANE_PATH_WIDTH_KM_KEY = "plane_path_width_km"
     PLANE_PATH_COLOR_KEY = "plane_path_color"
     SHORT_PARACHUTE_PATH_WIDTH_KM_KEY = "short_parachute_path_width_km"
@@ -117,29 +118,18 @@ class Plotter:
     TRIANGLE_SIZE_KM_KEY = "triangle_size_km"
     TRIANGLE_COLOR_KEY = "triangle_color"
 
-    ## Defaults
-    PLANE_PATH_WIDTH_KM = CONFIG_OPTIONS.get(PLANE_PATH_WIDTH_KM_KEY, 0.1)
-    PLANE_PATH_COLOR = CONFIG_OPTIONS.get(PLANE_PATH_COLOR_KEY, "white")
-    SHORT_PARACHUTE_PATH_WIDTH_KM = CONFIG_OPTIONS.get(SHORT_PARACHUTE_PATH_WIDTH_KM_KEY, 1.4)
-    SHORT_PARACHUTE_PATH_COLOR = CONFIG_OPTIONS.get(SHORT_PARACHUTE_PATH_COLOR_KEY, "red")
-    LONG_PARACHUTE_PATH_WIDTH_KM = CONFIG_OPTIONS.get(LONG_PARACHUTE_PATH_WIDTH_KM_KEY, 3)
-    LONG_PARACHUTE_PATH_COLOR = CONFIG_OPTIONS.get(LONG_PARACHUTE_PATH_COLOR_KEY, "orange")
-    TRIANGLE_SIZE_KM = CONFIG_OPTIONS.get(TRIANGLE_SIZE_KM_KEY, 0.2)
-    TRIANGLE_COLOR = CONFIG_OPTIONS.get(TRIANGLE_COLOR_KEY, "white")
 
-
-    def __init__(self, **kwargs):
-        self.file_controller = PlotterFileController(**kwargs)
+    def __init__(self, **file_controller_kwargs):
+        self.file_controller = PlotterFileController(**file_controller_kwargs)
         self.base_maps = self.file_controller.load_base_maps()
 
-        self.plane_path_width_km = float(kwargs.get(self.PLANE_PATH_WIDTH_KM_KEY, self.PLANE_PATH_WIDTH_KM))
-        self.plane_path_color = kwargs.get(self.PLANE_PATH_COLOR_KEY, self.PLANE_PATH_COLOR)
-        self.short_parachute_path_width_km = float(kwargs.get(self.SHORT_PARACHUTE_PATH_WIDTH_KM_KEY, self.SHORT_PARACHUTE_PATH_WIDTH_KM))
-        self.short_parachute_path_color = kwargs.get(self.SHORT_PARACHUTE_PATH_COLOR_KEY, self.SHORT_PARACHUTE_PATH_COLOR)
-        self.long_parachute_path_width_km = float(kwargs.get(self.LONG_PARACHUTE_PATH_WIDTH_KM_KEY, self.LONG_PARACHUTE_PATH_WIDTH_KM))
-        self.long_parachute_path_color = kwargs.get(self.LONG_PARACHUTE_PATH_COLOR_KEY, self.LONG_PARACHUTE_PATH_COLOR)
-        self.triangle_size_km = kwargs.get(self.TRIANGLE_SIZE_KM_KEY, self.TRIANGLE_SIZE_KM)
-        self.triangle_color = kwargs.get(self.TRIANGLE_COLOR_KEY, self.TRIANGLE_COLOR)
+        self.plane_path_width_km = CONFIG_OPTIONS.get(self.PLANE_PATH_WIDTH_KM_KEY, 0.1)
+        self.plane_path_color = CONFIG_OPTIONS.get(self.PLANE_PATH_COLOR_KEY, "white")
+        self.triangle_size_km = CONFIG_OPTIONS.get(self.TRIANGLE_SIZE_KM_KEY, 0.2)
+        self.triangle_color = CONFIG_OPTIONS.get(self.TRIANGLE_COLOR_KEY, "white")
+
+        self.parachute_config = CONFIG_OPTIONS.get(self.PARACHUTE_CONFIG_KEY, None)
+        assert(self.parachute_config != None)
 
 
     def _rotate_coordinate(self, x, y, angle):
@@ -228,17 +218,20 @@ class Plotter:
         x2 = x + map_diagonal_length * math.cos(angle)
         y2 = y - map_diagonal_length * math.sin(angle)
 
+        ## Get the correct parachute config from the dict
+        parachute_config = self.parachute_config[map_name]
+
         ## Prep widths
         plane_path_width = int(self.plane_path_width_km * pixels_per_km)
         triangle_size = int(self.triangle_size_km * pixels_per_km)
         ## *2 because the width is only half of what it should be, since players can drop in any direction
-        short_parachute_path_width = int(self.short_parachute_path_width_km * pixels_per_km * 2)
-        long_parachute_path_width = int(self.long_parachute_path_width_km * pixels_per_km * 2)
+        short_parachute_path_width = int(parachute_config[self.SHORT_PARACHUTE_PATH_WIDTH_KM_KEY] * pixels_per_km * 2)
+        long_parachute_path_width = int(parachute_config[self.LONG_PARACHUTE_PATH_WIDTH_KM_KEY] * pixels_per_km * 2)
 
         ## Plot the requisite lines
-        ## Todo: plot in place?
-        plotted_map = self._plot_line(base_map, x1, y1, x2, y2, long_parachute_path_width, self.long_parachute_path_color)
-        plotted_map = self._plot_line(base_map, x1, y1, x2, y2, short_parachute_path_width, self.short_parachute_path_color)
+        ## Todo: plot in place
+        plotted_map = self._plot_line(base_map, x1, y1, x2, y2, long_parachute_path_width, parachute_config[self.LONG_PARACHUTE_PATH_COLOR_KEY])
+        plotted_map = self._plot_line(base_map, x1, y1, x2, y2, short_parachute_path_width, parachute_config[self.SHORT_PARACHUTE_PATH_COLOR_KEY])
         plotted_map = self._plot_line(base_map, x1, y1, x2, y2, plane_path_width, self.plane_path_color)
         plotted_map = self._plot_triangle(base_map, x, y, angle, triangle_size, self.triangle_color)
 
